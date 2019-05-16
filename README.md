@@ -31,6 +31,9 @@ In addition, our system will provide message between job hunter and company to h
 | Client UI implementation  |  |  |  |  |  | O | O | O | O |  |
 | Presentation              |  |  |  |  |  |  |  |  | O | O |
 
+### ER Diagram
+Download [Our ERD.pdf](./CS360_Team9_ERD.pdf).
+
 ## Collaborator
 * Juan Lee
 * Hyunchang Oh
