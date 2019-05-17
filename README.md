@@ -35,17 +35,12 @@ In addition, our system will provide message between job hunter and company to h
 Download [Our ERD.pdf](./CS360_Team9_ERD.pdf).
 
 ### User's Workflow
-
-#### Student's Workflow
-![student's workflow](./student_workflow.png)
-
-#### Company's Workflow
-![company's workflow](./company_workflow.png)
+![student's workflow](./workflow.png)
 
 ## Collaborator
 * Juan Lee
 * Hyunchang Oh
-* Sugnwoo Jeon
+* Sungwoo Jeon
 
 ## How to run?
 Before you run, create ```Credentials.py``` and put your own database credentials.
