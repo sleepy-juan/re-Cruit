@@ -5,6 +5,43 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    return render_template("index.html")
+
+@app.route("/student")
+def student():
+    return render_template("student.html")
+
+@app.route("/company")
+def company():
+    return render_template("company.html")
+
+@app.route("/studentmypage")
+def studentmypage():
+    return render_template("studentmypage.html")
+
+@app.route("/companymypage")
+def companymypage():
+    return render_template("companymypage.html")
+
+@app.route("/addcourse")
+def addcourse():
+    return render_template("addcourse.html")
+
+@app.route("/addwork")
+def addwork():
+    return render_template("addwork.html")
+
+@app.route("/addposition")
+def addposition():
+    return render_template("addposition.html")
+
+if __name__ == "__main__":
+    app.run('0.0.0.0', port=5000)
+
+
+'''
+@app.route("/")
+def index():
     return render_template('index.html')
 
 # url for select
@@ -85,3 +122,4 @@ def insert_sent(Fname, Lname, Ssn):
 
 if __name__ == "__main__":
     app.run('0.0.0.0', port=5000)
+'''
