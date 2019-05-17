@@ -19,7 +19,7 @@ If users (HR department of company or job hunters) want to use our web service, 
 After uploading user’s information, users can be filtering the company or job hunters to recruitment. If they enter the specific keyword for job such as ‘programming’, then they can get the result related to ‘programming’ like company recruiting developer or people who major in Computer Science.  
 In addition, our system will provide message between job hunter and company to help users recruit the job.
 
-### Schedule
+### Development Schedule
 
 | week                      | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  |
 | ---                       | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -33,6 +33,14 @@ In addition, our system will provide message between job hunter and company to h
 
 ### ER Diagram
 Download [Our ERD.pdf](./CS360_Team9_ERD.pdf).
+
+### User's Workflow
+
+#### Student's Workflow
+![student's workflow](./student_workflow.png)
+
+#### Company's Workflow
+![company's workflow](./company_workflow.png)
 
 ## Collaborator
 * Juan Lee
