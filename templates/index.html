@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>re:Cruit</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css')}}">
 </head>
 <body>
     <!--
         <div class="header">
-            <a class="logo" href="index.html">re:Cruit</a>
+            <a class="logo" href="index">re:Cruit</a>
         </div>
     -->
 
@@ -21,18 +21,18 @@
             Older here? Sign In!
         </h3>
     
-        <form action="/studentmypage.html" method="POST">
+        <form action="/signin" method="POST">
             <input type="text" name="userid" placeholder="        ID">
             <input type="password" name="userpw" placeholder="        Password">
-            <input type="radio" name="student" value= "Student" checked> As a student
-            <input type="radio" name="company" value="Company"> As a company
+            <input type="radio" name="role" value="student" checked> As a student
+            <input type="radio" name="role" value="company"> As a company
 
-            <button type="button" name="submit">Sign In</button>
+            <button type="submit">Sign In</button>
         </form>
 
         <br/>
-        <button> <a href="student.html"> Student Enroll </a> </button> 
-        <button> <a href="company.html"> Company Enroll  </a> </button> 
+        <button> <a href="student"> Student Enroll </a> </button> 
+        <button> <a href="company"> Company Enroll  </a> </button> 
     </div>
 
 </body>

@@ -2,19 +2,19 @@
 <html>
 <head>
     <title>re:Cruit</title>
-    <link rel="stylesheet" type="text/css" href="common.css">
-    <link rel="stylesheet" type="text/css" href="mypage.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css')}}">
 </head>
 <body>
     <div class="header">
-        <a class="logo" href="index.html">re:Cruit</a>
+        <a class="logo" href="index">re:Cruit</a>
 
-        <span class="user">Hi, Sungwoo<a class="logout" href="index.html">, Logout?</a></span>
+        <span class="user">Hi, Sungwoo<a class="logout" href="index">, Logout?</a></span>
     </div>
 
     <div class="contents">
         <h3>Glad to see you have taken a course. Enter course details.</h3>
-        <form action="/studentmypage.html" method="POST">
+        <form action="/studentmypage" method="POST">
             <input type="text" name="crcode" placeholder="        Course Code">
             <input type="text" name="crname" placeholder="        Course Name">
             <input type="text" name="crcredit" placeholder="        Course Credit">
@@ -30,7 +30,7 @@
 
         <h3>Or, browse through the courses that others have added. Input course details to find best matches.</h3>
 
-        <form action="/studentmypage.html" method="POST">
+        <form action="/studentmypage" method="POST">
             <input type="text" name="crcode" placeholder="        Course Code">
             <input type="text" name="crname" placeholder="        Course Name">
 

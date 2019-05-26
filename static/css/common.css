@@ -51,6 +51,6 @@ input[type=text], input[type=password] {
     border: 1px solid #ddd;
 }
 
-button[name=submit] {
+button[type=submit] {
     float: right;
 }

@@ -4,16 +4,21 @@ import database as db
 app = Flask(__name__)
 
 @app.route("/")
+@app.route("/index.html")
 def index():
     return render_template("index.html")
 
-@app.route("/student")
-def student():
-    return render_template("student.html")
+@app.route("/signin", methods = ["POST"])
+def signin():
+    if request.method == 'POST':
+        uid = request.form["userid"]
+        upw = request.form["userpw"]
+        stu = request.form["role"]
 
-@app.route("/company")
-def company():
-    return render_template("company.html")
+        if stu == "student":    # as student
+            return redirect(url_for('studentmypage'))
+        else:                   # as company
+            return redirect(url_for('companymypage'))
 
 @app.route("/studentmypage")
 def studentmypage():
@@ -22,18 +27,6 @@ def studentmypage():
 @app.route("/companymypage")
 def companymypage():
     return render_template("companymypage.html")
-
-@app.route("/addcourse")
-def addcourse():
-    return render_template("addcourse.html")
-
-@app.route("/addwork")
-def addwork():
-    return render_template("addwork.html")
-
-@app.route("/addposition")
-def addposition():
-    return render_template("addposition.html")
 
 if __name__ == "__main__":
     app.run('0.0.0.0', port=5000)

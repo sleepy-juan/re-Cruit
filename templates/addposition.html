@@ -2,19 +2,19 @@
 <html>
 <head>
     <title>re:Cruit</title>
-    <link rel="stylesheet" type="text/css" href="common.css">
-    <link rel="stylesheet" type="text/css" href="mypage.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css')}}">
 </head>
 <body>
     <div class="header">
-        <a class="logo" href="index.html">re:Cruit</a>
+        <a class="logo" href="index">re:Cruit</a>
 
-        <span class="user">Hi, Sungwoo<a class="logout" href="index.html">, Logout?</a></span>
+        <span class="user">Hi, Sungwoo<a class="logout" href="index">, Logout?</a></span>
     </div>
 
     <div class="contents">
         <h3>Glad to see you are offering something. Enter positoin details.</h3>
-        <form action="/studentmypage.html" method="POST">
+        <form action="/studentmypage" method="POST">
             <input type="text" name="wname" placeholder="        Position name">
             <input type="text" name="wdescription" placeholder="        Position Description">
             <input type="text" name="wgpa" placeholder="        Position Required GPA">

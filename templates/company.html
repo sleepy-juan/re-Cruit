@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>re:Cruit</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css')}}">
 </head>
 <body>
     <!--
@@ -17,7 +17,7 @@
         <p class="centered">Enter your information so that students can apply for positions in you.</p>
         <hr />
 
-        <form action="/companymypage.html" method="POST">
+        <form action="/companymypage" method="POST">
             <input type="text" name="cid" placeholder="        Company ID">
             <input type="text" name="name" placeholder="        Company Name">
             <input type="text" name="address" placeholder="        Company Address">

@@ -1,15 +1,27 @@
-<h2>
-    Welcome, student [student_name]!! <button> 
-</h2>
-<p>
-    Glad to see you have done some work. Enter work details.
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css')}}">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="index">re:Cruit</a>
 
-Work Name: <input type="text" name="wname"><br>
-Work Description: <input type="text" name="wdescription"><br>
-Work Category: <input type="text" name="wcategory"><br>
+        <span class="user">Hi, Sungwoo<a class="logout" href="index">, Logout?</a></span>
+    </div>
 
+    <div class="contents">
+        <h3>Glad to see you have done some work. Enter work details.</h3>
+        <form action="/studentmypage" method="POST">
+            <input type="text" name="wname" placeholder="        Work Name">
+            <input type="text" name="wdescription" placeholder="        Work Description">
+            <input type="text" name="wcategory" placeholder="        Work Category">
 
-<button> <a href="addwork"> Add This Work, and add another Work </a> </button> <br>
-<br>
-<button> <a href="studentmypage"> Add This Work, and return to mypage </a> </button> <br>
+            <button type="button" name="submit">Add this work and return</button>
+        </form>
+    </div>
+
+</body>
+</html>
