@@ -2,32 +2,37 @@
 <html>
 <head>
     <title>re:Cruit</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="common.css">
 </head>
 <body>
-    <div class="header">
-        <a class="logo" href="index.html">re:Cruit</a>
-    </div>
+    <!--
+        <div class="header">
+            <a class="logo" href="index.html">re:Cruit</a>
+        </div>
+    -->
 
     <div class="contents">
-        <h1>Welcome to re:Cruit</h1>
-        <p>re:Cruit makes you easy to find job, and recruit people for the position you offer.</p>
+        <h1 class="centered bigger">re:Cruit</h1>
+        <p class="centered">re:Cruit makes you easy to find job, and recruit people for the position you offer.</p>
         <hr />
 
-        <div class="left">
+        <h3>
+            Older here? Sign In!
+        </h3>
+    
+        <form action="/studentmypage.html" method="POST">
+            <input type="text" name="userid" placeholder="        ID">
+            <input type="password" name="userpw" placeholder="        Password">
+            <input type="radio" name="student" value= "Student" checked> As a student
+            <input type="radio" name="company" value="Company"> As a company
 
-        </div>
-        <div class="right">
-            
-        </div>
-    
-        <h2>Old here? Welcome back!</h2>
-        <p>ID: <input type="text" name="userid"></p>
-        <p>PW: <input type="password" name="userpw"></p>
-    
-        <h2>New here? Enroll now!</h2>
-        <button> <a href="student"> Student Enroll </a> </button> 
-        <button> <a href="company"> Company Enroll  </a> </button> 
+            <button type="button" name="submit">Sign In</button>
+        </form>
+
+        <br/>
+        <button> <a href="student.html"> Student Enroll </a> </button> 
+        <button> <a href="company.html"> Company Enroll  </a> </button> 
     </div>
 
 </body>

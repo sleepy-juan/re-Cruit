@@ -1,15 +1,28 @@
-<h2>
-    Welcome, company [student_name]!! <button> 
-</h2>
-<p>
-    Glad to see you are offering something. Enter position details.
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="mypage.css">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="index.html">re:Cruit</a>
 
-Position name: <input type="text" name="wname"><br>
-Position Description: <input type="text" name="wdescription"><br>
-Position Required GPA: <input type="text" name="wcategory"><br>
+        <span class="user">Hi, Sungwoo<a class="logout" href="index.html">, Logout?</a></span>
+    </div>
 
+    <div class="contents">
+        <h3>Glad to see you are offering something. Enter positoin details.</h3>
+        <form action="/studentmypage.html" method="POST">
+            <input type="text" name="wname" placeholder="        Position name">
+            <input type="text" name="wdescription" placeholder="        Position Description">
+            <input type="text" name="wgpa" placeholder="        Position Required GPA">
+            <input type="text" name="wcourses" placeholder="        Position Required Courses">
+    
+            <button type="button" name="submit">Add this position and return</button>
+        </form>
+    </div>
 
-<button> <a href="addwork"> Add This Position, and add another Position </a> </button> <br>
-<br>
-<button> <a href="studentmypage"> Add This Position, and return to mypage </a> </button> <br>
+</body>
+</html>

@@ -1,34 +1,42 @@
-<h2>
-    Welcome, student [student_name]!!
-</h2>
-<p>
-    Glad to see you have taken a course. Enter course details.
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="mypage.css">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="index.html">re:Cruit</a>
 
-Course Code: <input type="text" name="crcode"><br>
-Course Name: <input type="text" name="crname"><br>
-Course Credit: <input type="text" name="crcredit"><br>
-Course Syllabus: <input type="text" name="crsyllabus"><br>
-Course Professor: <input type="text" name="crprofessor"><br>
+        <span class="user">Hi, Sungwoo<a class="logout" href="index.html">, Logout?</a></span>
+    </div>
 
-<br>
+    <div class="contents">
+        <h3>Glad to see you have taken a course. Enter course details.</h3>
+        <form action="/studentmypage.html" method="POST">
+            <input type="text" name="crcode" placeholder="        Course Code">
+            <input type="text" name="crname" placeholder="        Course Name">
+            <input type="text" name="crcredit" placeholder="        Course Credit">
+            <input type="text" name="crsyllabus" placeholder="        Course Syllabus">
+            <input type="text" name="crprofessor" placeholder="        Course Professor">
+            <hr/>
+            <input type="text" name="crgrade" placeholder="        Your Grade on the Course">
+            <input type="text" name="cryeaer" placeholder="        Year you took the course">
+            <input type="text" name="crsemester" placeholder="        Semester you took the course">
 
-Your Grade on the Course: <input type="text" name="crgrade"><br>
-Year you took the course: <input type="text" name="cryeaer"><br>
-Semester you took the course: <input type="text" name="crsemester"><br>
+            <button type="button" name="submit">Add this course and return</button>
+        </form>
 
-<button> <a href="addcourse"> Add Course, and add another course </a> </button> <br> <br>
-<button> <a href="studentmypage"> Add Course, and return to mypage </a> </button> <br>
+        <h3>Or, browse through the courses that others have added. Input course details to find best matches.</h3>
 
-<p>
-    Or, browse through the courses that others have added. Input course details to find best matches.
-</p>
+        <form action="/studentmypage.html" method="POST">
+            <input type="text" name="crcode" placeholder="        Course Code">
+            <input type="text" name="crname" placeholder="        Course Name">
 
-Course Code: <input type="text" name="crcode"><br>
-Course Name: <input type="text" name="crname"><br>
-Course Credit: <input type="text" name="crcredit"><br>
-Course Syllabus: <input type="text" name="crsyllabus"><br>
-Course Professor: <input type="text" name="crprofessor"><br>
+            <button type="button" name="submit">Search</button>
+        </form>
+    </div>
 
-
-<button> <a href="#"> Search.. </a> </button> <br>
+</body>
+</html>
