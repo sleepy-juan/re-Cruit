@@ -4,6 +4,7 @@ import database as db
 app = Flask(__name__)
 
 @app.route("/")
+@app.route("/index")
 @app.route("/index.html")
 def index():
     return render_template("index.html")
@@ -14,19 +15,34 @@ def signin():
         uid = request.form["userid"]
         upw = request.form["userpw"]
         stu = request.form["role"]
+        result = db.signIn(uid, upw, stu)
+
+        if not result:
+            if stu == "student":
+                return redirect(url_for('student'))
+            else:
+                return redirect(url_for('company'))
 
         if stu == "student":    # as student
-            return redirect(url_for('studentmypage'))
+            return redirect(url_for('studentmypage', Fname=result[4]))
         else:                   # as company
-            return redirect(url_for('companymypage'))
+            return redirect(url_for('companymypage', name=result[3]))
 
-@app.route("/studentmypage")
-def studentmypage():
-    return render_template("studentmypage.html")
+@app.route("/studentmypage/<Fname>/")
+def studentmypage(Fname):
+    return render_template("studentmypage.html", Fname = Fname)
 
-@app.route("/companymypage")
-def companymypage():
-    return render_template("companymypage.html")
+@app.route("/companymypage/<name>/")
+def companymypage(name):
+    return render_template("companymypage.html", name = name)
+
+@app.route("/student")
+def student():
+    return render_template("student.html")
+
+@app.route("/company")
+def company():
+    return render_template("company.html")
 
 if __name__ == "__main__":
     app.run('0.0.0.0', port=5000)

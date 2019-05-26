@@ -6,129 +6,52 @@ import pymysql
 def connect():
     return pymysql.connect(host=C.host, port=C.port, user=C.user, passwd=C.passwd, db=C.db, charset=C.charset)
 
-def getAll(table):
+def query(sql):
     db = connect()
     result = []
     try:
         with db.cursor() as cursor:
-            sql = "SELECT * FROM %s;" % table
             cursor.execute(sql)
             result = cursor.fetchall()
+        db.commit()
     finally:
         db.close()
     
     return result
 
-def login_accept(id, password, type):
-    account_list = getAll(type)
-    if (type == "student"):
-        for i in account_list:
-            if ((i[0] == id) and (i[6] == password)):
-                return True
-        return False
-    elif (type == "company"):
-
-        for i in account_list:
-            if ((i[0] == id) and(i[4] == password)):
-                return True
-        return False
+def signIn(id, pw, type):
+    if type == "student":
+        sql = '''SELECT * FROM student WHERE sid = "%s" and password="%s"''' % (id, pw)
     else:
-        return False
-
-def add_student(SID, fname, lname, phone, email, school, major, password):
-    db = connect()
+        sql = '''SELECT * FROM company WHERE cid = "%s" and password="%s"''' % (id, pw)
     
-    try:
-        with db.cursor() as cursor:
-            sql = '''insert into student values(%d, "%s", "%s", "%s", "%s", "%s", "%s");''' % (SID, school, email, phone, fname, lname, password)
-            cursor.execute(sql)
-            sql = '''insert into major values(%d, "%s");''' % (SID, major)
-            cursor.execute(sql)
-        db.commit()
-    finally:
-        db.close()
-    return True
-def add_company(CID, email, address, name, password):
-    db = connect()
-    
-    try:
-        with db.cursor() as cursor:
-            sql = '''insert into student values(%d, "%s", "%s", "%s", "%s");''' % (CID, email, address, name, password)
-            cursor.execute(sql)
-        db.commit()
-    finally:
-        db.close()
-    return True
-
-def add_course_student(SID, code, name, credit, syllabus, professor, grade, year, semester, retake):
-    db = connect()
-    try:
-        with db.cursor() as cursor:
-            sql = '''insert into course values(%d, "%s", "%s", "%s");''' % (code, name, credit, professor)
-            cursor.execute(sql)
-            sql = '''insert into takes values(%d, "%s", "%s", "%s", "%s", %d);''' % (SID, code, grade, year, semester, retake)
-            cursor.execute(sql)
-        db.commit()
-    finally:
-        db.close()
-    return True
-
-def add_work_student(SID, name, description, category):
-    db = connect()
-    try:
-        with db.cursor() as cursor:
-            sql = '''insert into didworks values(%d, "%s", "%s", "%s");''' % (SID, name, description, category)
-            cursor.execute(sql)
-        db.commit()
-    finally:
-        db.close()
-    return True
-
-def view_message_student(SID):
-    db = connect()
-    result = []
-    try:
-        with db.cursor() as cursor:
-            sql = "SELECT * FROM MESSAGE;"
-            cursor.execute(sql)
-            result = cursor.fetchall()
-    finally:
-        db.close()
-    result_filter = []
-    for i in result:
-        if (i[1] == SID):
-            result_filter.append(i)
-    return result_filter
-def view_message_company(CID):
-    db = connect()
-    result = []
-    try:
-        with db.cursor() as cursor:
-            sql = "SELECT * FROM MESSAGE;"
-            cursor.execute(sql)
-            result = cursor.fetchall()
-    finally:
-        db.close()
-    result_filter = []
-    for i in result:
-        if (i[2] == CID):
-            result_filter.append(i)
-    return result_filter
-
-def add_position(CID, Cname, Pname, PID, description, required_GPA, required_Code):
-    db = connect()
-    try:
-        with db.cursor() as cursor:
-            sql = '''insert into position values("%s", %d, "%s", "%s");''' % (pname, PID, description, required_GPA)
-            cursor.execute(sql)
-            sql = '''insert into holds values(%d, %d);''' % (CID, PID)
-            cursor.execute(sql)
-            for code in required_Code:
-                sql = '''insert into requires values(%d, %d);''' % (code, PID)
-                cursor.execute(sql)
-        db.commit()
-    except:
+    res = query(sql)
+    if len(res) == 0:
         return False
-    finally:
-        db.close()
-    return True
+    return res[0]
+
+def add(obj, type):
+    if type == "student":
+        sql = '''INSERT INTO student VALUES(%d, "%s", "%s", "%s", "%s", "%s", "%s");''' % (obj['sid'], obj['school'], obj['email'], obj['phone'], obj['fname'], obj['lname'], obj['password'])
+        query(sql)
+
+        sql = '''INSERT INTO student VALUES("%s", "%s")''' % (obj['sid'], obj['major'])
+        query(sql)
+    elif type == "company":
+        sql = '''INSERT INTO company VALUES(%d, "%s", "%s", "%s", "%s");''' % (obj['cid'], obj['email'], obj['address'], obj['name'], obj['password'])
+        query(sql)
+    elif type == "work":
+        sql = '''INSERT INTO didworks VALUES(%d, "%s", "%s", "%s");''' % (obj["sid"], obj["name"], obj["description"], obj["category"])
+        query(sql)
+    elif type == "course":
+        sql = '''INSERT INTO course VALUES(%d, "%s", "%s", "%s");''' % (obj['code'], obj['name'], obj['credit'], obj['professor'])
+        query(sql)
+
+        sql = '''INSERT INTO takes VALUES(%d, "%s", "%s", "%s", "%s", %d)''' % (obj['sid'], obj['code'], obj['grade'], obj['year'], obj['semester'], obj['retake'])
+        query(sql)
+    elif type == "position":
+        sql = '''INSERT INTO position VALUES("%s", %d, "%s", "%s");''' % (obj['pname'], obj['pid'], obj['description'], obj['required_GPA'])
+        query(sql)
+
+        sql = '''INSERT INTO holds VALUES(%d, %d);''' % (obj['cid'], obj['pid'])
+        query(sql)
