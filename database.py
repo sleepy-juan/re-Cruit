@@ -48,7 +48,7 @@ def add_student(SID, fname, lname, phone, email, school, major, password):
     finally:
         db.close()
     return True
-def add_company(CID, emali, address, name, password):
+def add_company(CID, email, address, name, password):
     db = connect()
     
     try:
@@ -77,7 +77,7 @@ def add_work_student(SID, name, description, category):
     db = connect()
     try:
         with db.cursor() as cursor:
-            sql = '''insert into didworks values(%d, "%s", "%s", "%s");''' % (code, name, description, category)
+            sql = '''insert into didworks values(%d, "%s", "%s", "%s");''' % (SID, name, description, category)
             cursor.execute(sql)
         db.commit()
     finally:
