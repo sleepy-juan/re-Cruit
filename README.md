@@ -37,6 +37,58 @@ Download [Our ERD.pdf](./CS360_Team9_ERD.pdf).
 ### User's Workflow
 ![student's workflow](./workflow.png)
 
+## Screenshots
+![Sign In](./screenshots/SignIn.png)  
+> Home, Sign In Page  
+
+When users first visit the site, they need to **sign in**. If they don't have account or the given id and password are not match, the register page is open.
+
+![Student Enroll](./screenshots/StudentEnroll.png)
+> Student Enroll  
+
+For students who don't have an account yet, they can register their information on the **student enroll** page.
+
+![Company Enroll](./screenshots/CompanyEnroll.png)
+> Company Enroll  
+
+For companies who don't have an account yet, they can register their information on the **company enroll** page.
+
+![Student Mypage](./screenshots/StudentMypage.png)
+> Student Mypage  
+
+This is the **home** for the students, including **course** list, **work** list, **recommended positions**, and **messages**.  
+Students can easily add the courses they have taken and work they have done, and can interact with companies.
+
+![Add Course](./screenshots/AddCourse.png)
+> Add Course  
+
+![Add Work](./screenshots/AddWork.png)
+> Add Work  
+
+![Company Mypage](./screenshots/CompanyMypage.png)
+> Company Mypage  
+
+This is the **home** for the companies, including **position** list and **message interface**.
+Companies can easily register the positions they want to offer and can interact with students.
+
+![Add Position](./screenshots/AddPosition.png)
+> Add Position  
+
+![Message Student Side](./screenshots/MessageStudentSide.png)
+> Message - Student Side  
+
+![Message Company Side](./screenshots/MessageCompanySide.png)
+> Message - Company Side  
+
+![Search](./screenshots/Search.png)
+> Search  
+
+We also offer **search** function, which queries all the students, companies, positions and courses.  
+This help users use and explore **re:Cruit**.
+
+![Search Result](./screenshots/SearchResult.png)
+> Search Result  
+
 ## Collaborator
 * Juan Lee
 * Hyunchang Oh

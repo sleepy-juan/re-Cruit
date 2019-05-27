@@ -36,11 +36,23 @@ def _signin():
 
 #--------------------------------------------------------------------------------
 # Sign In
-#
+
+# Page - Search with query
+@app.route("/searchquery/<query>")
+def searchquery(query):
+    student, company, position, course = db.search(query)
+    return render_template("search.html", students = student, companies = company, positions = position, courses = course)
 
 @app.route("/search")
 def search():
     return render_template("search.html")
+
+# Process - Search
+@app.route("/_search", methods=["POST"])
+def _search():
+    if request.method == "POST":
+        query = request.form['query']
+        return redirect(url_for('searchquery', query = query))
 
 #--------------------------------------------------------------------------------
 # Student
@@ -182,4 +194,4 @@ def _sendtothestudent(name, cid, sid):
 # run
 #
 if __name__ == "__main__":
-    app.run('0.0.0.0', port=5000)
+    app.run('0.0.0.0', port=5000, debug=False)

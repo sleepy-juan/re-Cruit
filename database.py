@@ -95,8 +95,17 @@ def calculate(what, uid):
     uid = int(uid)
     if what == "position":
         courses = get("course", uid)
-        gpa = list(map(lambda course: float(course[2]), courses))
-        gpa = sum(gpa) / len(gpa)
+        if len(courses) == 0:
+            return []
+
+        gradeMap = { "A+": 4.3, "A0":4, "A-":3.7, "B+":3.3, "B0":3, "B-":2.7, "C+":2.3, "C0":2, "C-":1.7, "D+":1.3, "D0":1, "D-":0.7, "F":0 }
+        grades = list(map(lambda course: gradeMap[course[3]], courses))
+        credits = list(map(lambda course: course[2], courses))
+
+        gpa = 0
+        for idx in range(len(grades)):
+            gpa += grades[idx] * credits[idx]
+        gpa /= len(credits)
 
         sql = '''SELECT company.name, position.name, position.description 
         FROM company, position, holds
@@ -131,3 +140,24 @@ def receive(uid, receiver):
         WHERE message.sid = student.sid and message.cid = company.cid and message.sender = "student" and company.cid = %d;''' % uid
         result = query(sql)
         return result
+
+def search(searchquery):
+    #Search student, company, job, course, etc.
+    student = []
+    company = []
+    position = []
+    course = []
+
+    for word in searchquery.split():
+        sql = '''SELECT sid, school, email, fname, lname FROM student WHERE sid LIKE "%%%s%%" OR fname LIKE "%%%s%%" OR lname LIKE "%%%s%%" OR email LIKE "%%%s%%" OR phone LIKE "%%%s%%" OR school LIKE "%%%s%%";''' % ((word, ) * 6)
+        student.extend(query(sql))
+
+        sql = '''SELECT name, email, address FROM company WHERE name LIKE "%%%s%%" OR email LIKE "%%%s%%" OR address LIKE "%%%s%%";''' % ((word, ) * 3)
+        company.extend(query(sql))
+
+        sql = '''SELECT name, description, required_gpa FROM position WHERE name LIKE "%%%s%%" OR description LIKE "%%%s%%";''' % (word, word)
+        position.extend(query(sql))
+
+        sql = '''SELECT * FROM course WHERE code LIKE "%%%s%%" OR name LIKE "%%%s%%" OR professor LIKE "%%%s%%";''' % ((word, ) * 3)
+        course.extend(query(sql))
+    return student, company, position, course
