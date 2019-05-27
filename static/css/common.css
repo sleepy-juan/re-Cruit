@@ -4,7 +4,7 @@ body {
     
     font-family: sans-serif;
 
-    background-color: #eee;
+    background-color: #f0f0f0;
 }
 .header {
     position: fixed;
@@ -26,6 +26,18 @@ body {
     font-weight: bolder;
     color: white;
     font-size: 1.5em;
+}
+
+.logo_button {
+    position: absolute;
+    top: 30px;
+    left: 140px;
+
+    transform: translate(0, -50%);
+
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
 }
 
 .user {
@@ -53,4 +65,22 @@ input[type=text], input[type=password] {
 
 button[type=submit] {
     float: right;
+}
+
+table {
+    text-align: left;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+th {
+    border-bottom: 1px solid #aaa;
+}
+
+th, td {
+    padding: 5px 1em 5px 1em;
+}
+
+tr:nth-of-type(even){
+    background-color: #ddd;
 }

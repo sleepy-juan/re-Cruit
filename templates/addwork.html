@@ -2,24 +2,24 @@
 <html>
 <head>
     <title>re:Cruit</title>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='abc')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css')}}">
 </head>
 <body>
     <div class="header">
         <a class="logo" href="index">re:Cruit</a>
 
-        <span class="user">Hi, Sungwoo<a class="logout" href="index">, Logout?</a></span>
+        <span class="user">Hi, {{Fname}}<a class="logout" href="index">, Logout?</a></span>
     </div>
 
     <div class="contents">
         <h3>Glad to see you have done some work. Enter work details.</h3>
-        <form action="/studentmypage" method="POST">
-            <input type="text" name="wname" placeholder="        Work Name">
-            <input type="text" name="wdescription" placeholder="        Work Description">
-            <input type="text" name="wcategory" placeholder="        Work Category">
+        <form action="_addwork" method="POST">
+            <input type="text" name="name" placeholder="        Work Name">
+            <input type="text" name="description" placeholder="        Work Description">
+            <input type="text" name="category" placeholder="        Work Category">
 
-            <button type="button" name="submit">Add this work and return</button>
+            <button type="submit">Add this work and return</button>
         </form>
     </div>
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='abcd')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css', q='aaaaaaa')}}">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="/">re:Cruit</a>
+
+        <span class="user">Hi, {{Fname}}{{name}}<a class="logout" href="/">, Logout?</a></span>
+    </div>
+
+    <div class="contents">
+        Search
+    </div>
+
+</body>
+</html>

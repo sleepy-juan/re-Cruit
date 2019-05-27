@@ -3,7 +3,7 @@
 <head>
     <title>re:Cruit</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='abc')}}">
 </head>
 <body>
     <!--
@@ -21,7 +21,7 @@
             Older here? Sign In!
         </h3>
     
-        <form action="/signin" method="POST">
+        <form action="/_signin" method="POST">
             <input type="text" name="userid" placeholder="        ID">
             <input type="password" name="userpw" placeholder="        Password">
             <input type="radio" name="role" value="student" checked> As a student
@@ -31,8 +31,8 @@
         </form>
 
         <br/>
-        <button> <a href="student"> Student Enroll </a> </button> 
-        <button> <a href="company"> Company Enroll  </a> </button> 
+        <button type="button" onClick="window.location.href='/student'">Student Enroll</button>
+        <button type="button" onClick="window.location.href='/company'">Company Enroll</button>
     </div>
 
 </body>
