@@ -24,7 +24,7 @@ def signIn(id, pw, type):
     if type == "student":
         sql = '''SELECT * FROM student WHERE sid = "%s" and password="%s"''' % (id, pw)
     else:
-        sql = '''SELECT * FROM company WHERE cid = "%s" and password="%s"''' % (id, pw)
+        sql = '''SELECT * FROM company WHERE name = "%s" and password="%s"''' % (id, pw)
     
     res = query(sql)
     if len(res) == 0:
@@ -40,7 +40,7 @@ def add(obj, type):
         sql = '''INSERT INTO major VALUES(%d, "%s")''' % (sid, obj['major'])
         query(sql)
     elif type == "company":
-        cid = int(obj['cid'])
+        cid = int(random.random() * 10000000)
         sql = '''INSERT INTO company VALUES(%d, "%s", "%s", "%s", "%s");''' % (cid, obj['email'], obj['address'], obj['name'], obj['password'])
         query(sql)
     elif type == "work":
@@ -71,20 +71,21 @@ def add(obj, type):
         query(sql)
 
 def get(what, uid):
-    uid = int(uid)
     if what == "position":
         sql = '''SELECT position.pid, position.name, position.description, position.required_gpa 
         FROM position, company, holds 
-        WHERE position.pid = holds.pid and holds.cid = company.cid and company.cid = %d;''' % uid
+        WHERE position.pid = holds.pid and holds.cid = company.cid and company.name = "%s";''' % uid
         result = query(sql)
         return result
     elif what == "course":
+        uid = int(uid)
         sql = '''SELECT course.code, course.name, course.credit, takes.grade, course.professor, takes.year, takes.semester
         FROM course, takes, student
         WHERE course.code = takes.code and takes.sid = student.sid and student.sid = %d;''' % uid
         result = query(sql)
         return result
     elif what == "work":
+        uid = int(uid)
         sql = '''SELECT didworks.name, didworks.description, didworks.category
         FROM didworks, student
         WHERE didworks.sid = student.sid and student.sid = %d;''' % uid
@@ -105,11 +106,14 @@ def calculate(what, uid):
         gpa = 0
         for idx in range(len(grades)):
             gpa += grades[idx] * credits[idx]
-        gpa /= len(credits)
+        gpa /= sum(credits)
 
         sql = '''SELECT company.name, position.name, position.description 
         FROM company, position, holds
         WHERE position.pid = holds.pid and holds.cid = company.cid and position.required_gpa < %f;''' % gpa
+
+        print(gpa)
+
         result = query(sql)
         return result
 
@@ -121,14 +125,13 @@ def send(msg, f, t, sender):
         sql = '''INSERT INTO message VALUES(%d, %d, (SELECT cid FROM company WHERE company.name = "%s"), now(), now(), "%s", "%s");''' % (mid, f, t, msg, sender)
         query(sql)
     else:
-        f = int(f)
         t = int(t)
-        sql = '''INSERT INTO message VALUES(%d, %d, %d, now(), now(), "%s", "%s");''' % (mid, t, f, msg, sender)
+        sql = '''INSERT INTO message VALUES(%d, %d, (SELECT cid FROM company WHERE company.name = "%s"), now(), now(), "%s", "%s");''' % (mid, t, f, msg, sender)
         query(sql)
 
 def receive(uid, receiver):
-    uid = int(uid)
     if receiver == "student":
+        uid = int(uid)
         sql = '''SELECT message.text, company.name
         FROM message, student, company
         WHERE message.sid = student.sid and message.cid = company.cid and message.sender = "company" and student.sid = %d;''' % uid
@@ -137,7 +140,7 @@ def receive(uid, receiver):
     else:
         sql = '''SELECT message.text, student.fname, student.lname, student.sid
         FROM message, student, company
-        WHERE message.sid = student.sid and message.cid = company.cid and message.sender = "student" and company.cid = %d;''' % uid
+        WHERE message.sid = student.sid and message.cid = company.cid and message.sender = "student" and company.name = "%s";''' % uid
         result = query(sql)
         return result
 

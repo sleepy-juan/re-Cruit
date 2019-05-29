@@ -32,7 +32,7 @@ def _signin():
         if stu == "student":    # as student
             return redirect(url_for('studentmypage', sid=result[0], Fname=result[4]))
         else:                   # as company
-            return redirect(url_for('companymypage', cid=result[0], name=result[3]))
+            return redirect(url_for('companymypage', name=result[3]))
 
 #--------------------------------------------------------------------------------
 # Sign In
@@ -146,49 +146,46 @@ def _companyenroll():
     if request.method == "POST":
         db.add(request.form, "company")
 
-        return redirect(url_for('companymypage', name = request.form["name"], cid = request.form["cid"]))
-    
+        return redirect(url_for('companymypage', name = request.form["name"]))
+
 # Page - Company MyPage
-@app.route("/companymypage/<name>/<cid>/")
-def companymypage(name, cid):
-    position = db.get("position", cid)
-    message = db.receive(cid, "company")
+@app.route("/companymypage/<name>/")
+def companymypage(name):
+    position = db.get("position", name)
+    message = db.receive(name, "company")
     return render_template("companymypage.html", name = name, positions = position, messages = message)
 
 # Page - Add Position
-@app.route("/companymypage/<name>/<cid>/addposition")
-def addposition(name, cid):
+@app.route("/companymypage/<name>/addposition")
+def addposition(name):
     return render_template("addposition.html")
 
 # Process - Add Position
-@app.route("/companymypage/<name>/<cid>/_addposition", methods = ["POST"])
-def _addposition(name, cid):
+@app.route("/companymypage/<name>/_addposition", methods = ["POST"])
+def _addposition(name):
     if request.method == "POST":
-        obj = {"cid": cid}
-        for field in ["name", "pid", "description", "required_gpa", "code"]:
-            obj[field] = request.form[field]
-        db.add(obj, "position")
+        db.add(request.form, "position")
 
-        return redirect(url_for('companymypage', name = name, cid = cid))
+        return redirect(url_for('companymypage', name = name))
 
 # Process - Send Message to Student
-@app.route("/companymypage/<name>/<cid>/_sendtostudent", methods = ["POST"])
-def _sendtostudent(name, cid):
+@app.route("/companymypage/<name>/_sendtostudent", methods = ["POST"])
+def _sendtostudent(name):
     if request.method == "POST":
         message = request.form['message']
         sid = request.form['sid']
-        db.send(message, cid, sid, "company")
+        db.send(message, name, sid, "company")
 
-        return redirect(url_for('companymypage', name = name, cid = cid))
+        return redirect(url_for('companymypage', name = name))
 
 # Process - Send Message to Student
-@app.route("/companymypage/<name>/<cid>/_sendtostudent/<sid>", methods = ["POST"])
-def _sendtothestudent(name, cid, sid):
+@app.route("/companymypage/<name>/_sendtostudent/<sid>", methods = ["POST"])
+def _sendtothestudent(name, sid):
     if request.method == "POST":
         message = request.form['message']
-        db.send(message, cid, sid, "company")
+        db.send(message, name, sid, "company")
 
-        return redirect(url_for('companymypage', name = name, cid = cid))
+        return redirect(url_for('companymypage', name = name))
 
 #--------------------------------------------------------------------------------
 # run
